@@ -3,4 +3,4 @@
 .venv/
 __pycache__/
 migrations/version/*
-!somefolder/.gitkeep 
+!migrations/version/.gitkeep 
