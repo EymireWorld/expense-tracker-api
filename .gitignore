@@ -2,4 +2,4 @@
 
 .venv/
 __pycache__/
-migrations/version/*
+migrations/versions/*
