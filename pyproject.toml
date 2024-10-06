@@ -1,0 +1,15 @@
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["standard"], version = "^0.115.0"}
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.35"}
+asyncpg = "^0.29.0"
+alembic = "^1.13.3"
+bcrypt = "^4.2.0"
+pyjwt = {extras = ["crypto"], version = "^2.9.0"}
+
+[tool.isort]
+multi_line_output = 3
+lines_after_imports = 2
