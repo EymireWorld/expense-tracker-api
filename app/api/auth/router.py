@@ -3,10 +3,10 @@ from fastapi import APIRouter
 from app.api.auth import services
 from app.api.auth.schemas import (
     TokenSchema,
-    UserShowSchema,
     UserSingInSchema,
     UserSingUpSchema
 )
+from app.api.users.schemas import UserShowSchema
 from app.dependencies import current_user_dep, session_dep
 
 
@@ -24,4 +24,4 @@ async def sign_up(session: session_dep, data: UserSingUpSchema) -> TokenSchema:
 
 @router.get('/me')
 async def profile(current_user: current_user_dep) -> UserShowSchema:
-    return current_user
+    return current_user  # type: ignore

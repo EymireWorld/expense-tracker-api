@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_session
 from app.models import UserModel
+from app.schemas import UserSchema
 from app.settings import JWT_TOKEN_LIFETIME
 
 
@@ -46,7 +47,7 @@ security = HTTPBearer()
 async def get_current_user(
     credentials: Annotated[HTTPAuthorizationCredentials, Depends(security)],
     session: AsyncSession = Depends(get_session)
-):
+) -> UserSchema:
     if credentials.scheme != 'Bearer':
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -69,4 +70,4 @@ async def get_current_user(
     stmt = select(UserModel).where(UserModel.id == data['user_id'])
     result = await session.execute(stmt)
 
-    return result.scalar()
+    return UserSchema.model_validate(result.scalar())

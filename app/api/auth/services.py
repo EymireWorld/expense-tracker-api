@@ -37,19 +37,15 @@ async def sing_in(session: AsyncSession, data: UserSingInSchema):
 
 
 async def sing_up(session: AsyncSession, data: UserSingUpSchema):
-    values = {
-        'name': data.name,
-        'first_name': data.first_name,
-        'last_name': data.last_name,
-        'email': data.email,
-        'hashed_password': hash_password(data.password)
-    }
-    stmt = insert(UserModel).values(**values).returning(UserModel.id)
+    stmt = insert(UserModel).values(
+        username=data.username,
+        email=data.email,
+        hashed_password=hash_password(data.password)
+    ).returning(UserModel.id)
 
     try:
         result = await session.execute(stmt)
     except IntegrityError:
-        await session.rollback()
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail='Username or email is already registered.'
@@ -57,7 +53,6 @@ async def sing_up(session: AsyncSession, data: UserSingUpSchema):
     else:
         await session.commit()
 
-    return TokenSchema(
-        access_token=encode_jwt(result.scalar()),
-        token_type='Bearer'
-    )
+    user_id = result.scalar()
+
+    return TokenSchema(access_token=encode_jwt(user_id), token_type='Bearer')  # type: ignore
