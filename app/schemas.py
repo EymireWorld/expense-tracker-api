@@ -18,5 +18,6 @@ class UserSchema(Schema):
 class RecordSchema(Schema):
     id: int
     user_id: int
+    description: str
     amount: float
     created_at: datetime

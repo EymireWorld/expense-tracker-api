@@ -11,7 +11,7 @@ router = APIRouter(prefix='/users', tags=['Users'])
 @router.get('')
 async def get_users(
     session: session_dep,
-    offset: int = Query(0, ge=0, le=100),
+    offset: int = Query(0, ge=0),
     limit: int = Query(10, gt=0)
 ) -> list[UserShowSchema]:
     return await services.get_users(session, offset, limit)  # type: ignore

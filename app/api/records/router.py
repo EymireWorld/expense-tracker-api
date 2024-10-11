@@ -13,7 +13,7 @@ router = APIRouter(prefix='/records', tags=['Records'])
 async def get_records(
     session: session_dep,
     current_user: current_user_dep,
-    offset: int = Query(0, ge=0, le=100),
+    offset: int = Query(0, ge=0),
     limit: int = Query(10, gt=0)
 ) -> list[RecordSchema]:
     return await services.get_records(session, current_user.id, offset, limit)

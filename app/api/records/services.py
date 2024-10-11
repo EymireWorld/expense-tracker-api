@@ -47,7 +47,7 @@ async def add_record(
 ) -> RecordSchema:
     stmt = insert(RecordModel).values(
         user_id=user_id,
-        amount=data.amount
+        **data.model_dump()
     ).returning(RecordModel)
     result = await session.execute(stmt)
 
