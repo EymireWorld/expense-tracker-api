@@ -4,3 +4,5 @@
 __pycache__/
 migrations/versions/*
 !migrations/versions/.gitkeep
+certificates/*
+!certificates/.gitkeep

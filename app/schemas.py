@@ -15,6 +15,13 @@ class UserSchema(Schema):
     created_at: datetime
 
 
+class UserShowSchema(Schema):
+    id: int
+    username: str
+    email: EmailStr
+    created_at: datetime
+
+
 class RecordSchema(Schema):
     id: int
     user_id: int

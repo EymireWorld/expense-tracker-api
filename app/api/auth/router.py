@@ -6,8 +6,8 @@ from app.api.auth.schemas import (
     UserSingInSchema,
     UserSingUpSchema
 )
-from app.api.users.schemas import UserShowSchema
 from app.dependencies import current_user_dep, session_dep
+from app.schemas import UserShowSchema
 
 
 router = APIRouter(prefix='/auth', tags=['Auth'])
